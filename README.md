@@ -1,5 +1,5 @@
 # NyxManager
-
+Manage Nyx Client, handle updates/uninstalling the program/repairs 
 
 
 ## Licensing 
