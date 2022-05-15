@@ -99,7 +99,7 @@ namespace NyxManager.Handler
         {
             try
             {
-                System.IO.File.Move($"{currentname}", $"{newname}");
+                File.Move($"{currentname}", $"{newname}");
             }
             catch (Exception ex)
             {
