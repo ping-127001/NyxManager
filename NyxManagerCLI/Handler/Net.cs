@@ -46,11 +46,10 @@ namespace NyxManagerCLI.Handler
             }
         }
 
-        public static void DownloadFile(string url, string fileName)
+        public static void DownloadFile(string url, string filePath)
         {
             WebClient client = new WebClient();
-            WebClient myWebClient = new WebClient();
-            myWebClient.DownloadFile(url, fileName);
+            client.DownloadFileTaskAsync(url, filePath);
         }
     }
 }
