@@ -41,14 +41,37 @@ namespace NyxManagerCLI
             if (input == "1")
             {
                 Console.Clear();
-                Console.WriteLine("Downloading Nyx");
-                Writer.resetOptions();
-                Console.WriteLine("");
-                Writer.optionsWriter("Menu");
 
-                Writer.resetOptions();
-                input = Console.ReadLine();
-                Options();
+                Console.WriteLine("Please select a folder to download Nyx to");
+                var dir = Console.ReadLine();
+                fstream.CheckFolderExist(dir);
+                if (fstream.FolderExists)
+                {
+                    Net.DownloadFile("https://raw.githubusercontent.com/ping-127001/NyxManager/main/NyxManagerCLI/App/App.config", dir + $"Nyx.zip");
+
+                    Console.WriteLine();
+                    Console.WriteLine("Downloading Nyx in the background");
+                    Writer.resetOptions();
+                    Console.WriteLine("");
+                    Writer.optionsWriter("Menu");
+
+                    Writer.resetOptions();
+                    input = Console.ReadLine();
+                    Options();
+                }
+                else if (!fstream.FolderExists)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Download failed, {dir} does not exist");
+
+                    Writer.resetOptions();
+                    Console.WriteLine("");
+                    Writer.optionsWriter("Menu");
+
+                    Writer.resetOptions();
+                    input = Console.ReadLine();
+                    Options();
+                }
             }
 
             if (input == "2")
