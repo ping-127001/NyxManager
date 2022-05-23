@@ -1,5 +1,3 @@
-//CREDIT:https://stackoverflow.com/questions/67008500/how-to-move-c-sharp-console-application-window-to-the-center-of-the-screen//
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
