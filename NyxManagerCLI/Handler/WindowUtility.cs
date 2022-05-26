@@ -82,7 +82,8 @@ namespace NyxManagerCLI.Handler
 
         public static void centerText(string text)
         {
-            Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", text));
+            Console.SetCursorPosition((Console.WindowWidth - text.Length) / 2, Console.CursorTop);
+            Console.WriteLine(text);
         }
     }
 }
