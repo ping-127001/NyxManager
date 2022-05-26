@@ -1,5 +1,4 @@
-//CREDIT:https://stackoverflow.com/questions/67008500/how-to-move-c-sharp-console-application-window-to-the-center-of-the-screen//
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -79,6 +78,11 @@ namespace NyxManagerCLI.Handler
             int y = (screenSize.Height - windowSize.Height) / 2;
 
             SetWindowPos(window, IntPtr.Zero, x, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+        }
+
+        public static void centerText(string text)
+        {
+            Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", text));
         }
     }
 }
