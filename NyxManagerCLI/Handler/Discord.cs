@@ -30,7 +30,7 @@ namespace NyxManagerCLI.Handler
                     client.SetPresence(new RichPresence()
                     {
                         Details = $"Nyx Manager",
-                        State = $"Idle",
+                        State = $"Managing Nyx",
                         Assets = new Assets()
                         {
                             LargeImageKey = "nyx",
@@ -49,7 +49,6 @@ namespace NyxManagerCLI.Handler
         {
             try
             {
-                client.Initialize();
                 client.SetPresence(new RichPresence()
                 {
                     Details = $"{details}",
