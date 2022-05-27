@@ -40,9 +40,14 @@ namespace NyxManagerCLI
 
             if (input == "1")
             {
+                if (Discord.client.IsInitialized)
+                {
+                    Discord.Update("Nyx Manager", "Installing Nyx");
+                }
+
                 Console.Clear();
 
-                Console.WriteLine("Please select a folder to download Nyx to");
+                WindowUtility.centerText("Please select a folder to download Nyx to");
                 var dir = Console.ReadLine();
                 fstream.CheckFolderExist(dir);
                 if (fstream.FolderExists)
@@ -50,19 +55,24 @@ namespace NyxManagerCLI
                     Net.DownloadFile("https://raw.githubusercontent.com/ping-127001/NyxManager/main/NyxManagerCLI/App/App.config", dir + $"Nyx.zip");
 
                     Console.WriteLine();
-                    Console.WriteLine("Downloading Nyx in the background");
+                    WindowUtility.centerText($"Downloading Nyx in the background to {dir}");
                     Writer.resetOptions();
                     Console.WriteLine("");
                     Writer.optionsWriter("Menu");
 
                     Writer.resetOptions();
                     input = Console.ReadLine();
+
+                    if (Discord.client.IsInitialized)
+                    {
+                        Discord.Update("Nyx Manager", "Managing Nyx");
+                    }
                     Options();
                 }
                 else if (!fstream.FolderExists)
                 {
                     Console.Clear();
-                    Console.WriteLine($"Download failed, {dir} does not exist");
+                    WindowUtility.centerText($"Download failed, {dir} does not exist");
 
                     Writer.resetOptions();
                     Console.WriteLine("");
@@ -70,14 +80,24 @@ namespace NyxManagerCLI
 
                     Writer.resetOptions();
                     input = Console.ReadLine();
+
+                    if (Discord.client.IsInitialized)
+                    {
+                        Discord.Update("Nyx Manager", "Managing Nyx");
+                    }
                     Options();
                 }
             }
 
             if (input == "2")
             {
+                if (Discord.client.IsInitialized)
+                {
+                    Discord.Update("Nyx Manager", "Repairing Nyx");
+                }
+
                 Console.Clear();
-                Console.WriteLine("Nyx Folder Location");
+                WindowUtility.centerText("Nyx Folder Location");
                 Writer.resetOptions();
 
                 var dir = Console.ReadLine();
@@ -86,26 +106,40 @@ namespace NyxManagerCLI
                 if (fstream.FolderExists)
                 {
                     Console.WriteLine("");
-                    Console.WriteLine("Reparing Nyx");
+                    WindowUtility.centerText("Reparing Nyx");
                     Console.WriteLine("");
                     Writer.optionsWriter("Menu");
                     Writer.resetOptions();
                     input = Console.ReadLine();
+
+                    if (Discord.client.IsInitialized)
+                    {
+                        Discord.Update("Nyx Manager", "Managing Nyx");
+                    }
                     Options();
                 }
                 else
                 {
 
-                    Console.WriteLine("Folder path does not exist");
+                    WindowUtility.centerText("Folder path does not exist");
                     Writer.optionsWriter("Menu");
                     Writer.resetOptions();
                     input = Console.ReadLine();
+
+                    if (Discord.client.IsInitialized)
+                    {
+                        Discord.Update("Nyx Manager", "Managing Nyx");
+                    }
                     Options();
                 }
             }
 
             if (input == "3")
             {
+                if (Discord.client.IsInitialized)
+                {
+                    Discord.Update("Nyx Manager", "Loaded plugins");
+                }
                 LoadPlugins();
             }
 
@@ -141,7 +175,8 @@ namespace NyxManagerCLI
                 {
                     //let the user fill in an plugin name
                     Console.WriteLine("input the name of the plugin you would like to load");
-                    string line = System.Console.ReadLine();
+                    Console.WriteLine("");
+                    string line = Console.ReadLine();
                     string name = line.Split(new char[] { ' ' }).FirstOrDefault();
                     if (line == "exit")
                     {
