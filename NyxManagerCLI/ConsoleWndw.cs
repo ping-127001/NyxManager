@@ -33,6 +33,7 @@ namespace NyxManagerCLI
             ascii();
             Console.WriteLine();
             Writer.optionsWriter("Download");
+            Writer.optionsWriter("Download Source");
             Writer.optionsWriter("Repair");
             Writer.optionsWriter("Plugins");
             Writer.optionsWriter("Exit");
@@ -42,7 +43,7 @@ namespace NyxManagerCLI
             {
                 if (Discord.client.IsInitialized)
                 {
-                    Discord.Update("Nyx Manager", "Installing Nyx");
+                    Discord.Update($"Nyx Manager | {Application.ProductVersion}", "Installing Nyx");
                 }
 
                 Console.Clear();
@@ -65,7 +66,7 @@ namespace NyxManagerCLI
 
                     if (Discord.client.IsInitialized)
                     {
-                        Discord.Update("Nyx Manager", "Managing Nyx");
+                        Discord.Update($"Nyx Manager | {Application.ProductVersion}", "Idle");
                     }
                     Options();
                 }
@@ -83,7 +84,7 @@ namespace NyxManagerCLI
 
                     if (Discord.client.IsInitialized)
                     {
-                        Discord.Update("Nyx Manager", "Managing Nyx");
+                        Discord.Update($"Nyx Manager | {Application.ProductVersion}", "Idle");
                     }
                     Options();
                 }
@@ -93,7 +94,60 @@ namespace NyxManagerCLI
             {
                 if (Discord.client.IsInitialized)
                 {
-                    Discord.Update("Nyx Manager", "Repairing Nyx");
+                    Discord.Update($"Nyx Manager | {Application.ProductVersion}", "Installing Nyx Source Code");
+                }
+
+                Console.Clear();
+
+
+                WindowUtility.centerText("Please select a folder to download Nyx Source to");
+                var dir = Console.ReadLine();
+                fstream.CheckFolderExist(dir);
+
+                if (fstream.FolderExists)
+                {
+                    Net.DownloadFile("https://github.com/ping-127001/Nyx/archive/refs/heads/main.zip", dir + $"NyxSrc.zip");
+
+                    Console.WriteLine();
+                    WindowUtility.centerText($"Downloading Nyx Source in the background to {dir}");
+                    Writer.resetOptions();
+                    Console.WriteLine("");
+                    Writer.optionsWriter("Menu");
+
+                    Writer.resetOptions();
+                    input = Console.ReadLine();
+
+                    if (Discord.client.IsInitialized)
+                    {
+                        Discord.Update($"Nyx Manager | {Application.ProductVersion}", "Idle");
+                    }
+                    Options();
+                }
+                else if (!fstream.FolderExists)
+                {
+                    Console.Clear();
+                    WindowUtility.centerText($"Download failed, {dir} does not exist");
+
+                    Writer.resetOptions();
+                    Console.WriteLine("");
+                    Writer.optionsWriter("Menu");
+
+                    Writer.resetOptions();
+                    input = Console.ReadLine();
+
+                    if (Discord.client.IsInitialized)
+                    {
+                        Discord.Update($"Nyx Manager | {Application.ProductVersion}", "Idle");
+                    }
+                    Options();
+                }
+            }
+
+            if (input == "3")
+            {
+                if (Discord.client.IsInitialized)
+                {
+                    Discord.Update($"Nyx Manager | {Application.ProductVersion}", "Repairing Nyx");
                 }
 
                 Console.Clear();
@@ -114,7 +168,7 @@ namespace NyxManagerCLI
 
                     if (Discord.client.IsInitialized)
                     {
-                        Discord.Update("Nyx Manager", "Managing Nyx");
+                        Discord.Update($"Nyx Manager | {Application.ProductVersion}", "Idle");
                     }
                     Options();
                 }
@@ -128,27 +182,27 @@ namespace NyxManagerCLI
 
                     if (Discord.client.IsInitialized)
                     {
-                        Discord.Update("Nyx Manager", "Managing Nyx");
+                        Discord.Update($"Nyx Manager | {Application.ProductVersion}", "Idle");
                     }
                     Options();
                 }
             }
 
-            if (input == "3")
+            if (input == "4")
             {
                 if (Discord.client.IsInitialized)
                 {
-                    Discord.Update("Nyx Manager", "Loaded plugins");
+                    Discord.Update($"Nyx Manager | {Application.ProductVersion}", "Loaded plugins");
                 }
                 LoadPlugins();
             }
 
-            if (input == "4")
+            if (input == "5")
             {
                 Environment.Exit(0);
             }
 
-            if (input != "1" | input != "2" | input != "3" | input != "4")
+            if (input != "1" | input != "2" | input != "3" | input != "4" | input != "5")
             {
                 Writer.resetOptions();
                 Options();
